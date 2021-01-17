@@ -17,12 +17,15 @@ int main(){
         for(int i=0;i<2*N;i++){
             int c;
             scanf("%1d",&c);
-            a = i%2!=0 ? a+c : a;
-            b = i%2==0 ? b+c : b;
+            a = i+1%2!=0 ? a+c : a;
+            b = i+1%2==0 ? b+c : b;
+//            cout<<a<<" "<<b<<" "<<endl;
             result = a>b ? 0 : 1;
             result = a==b ? -1 : result;
             penalty.push(c);
         }
+//        cout<<result<<" result"<<endl;
+//        break;
 
         int A=0,B=0;
         for(int i=1;i<=2*N;i++){
@@ -30,12 +33,13 @@ int main(){
                 int front = penalty.front();
                 penalty.pop();
                 A+=front;
-                int letsSayB = (N-(i/2)-1);
-                cout<<i<<"i ";
-                cout<<front<<"Front "<<A<<"A ";
-                cout<<letsSayB+B<<"LSSB ";
-                cout<<endl;
-                if(A > letsSayB+B && result == 0){
+                int letsSayA = (N-(i/2)-1);
+                int letsSayB = (N-(i/2));
+//                cout<<i<<"i ";
+//                cout<<front<<"Front "<<A+letsSayA<<"A ";
+//                cout<<letsSayB+B<<"LSSB ";
+//                cout<<endl;
+                if(A+letsSayA > letsSayB+B && result == 0){
                     cout<<i+1<<"Jadhav"<<endl;
                     break;
                 }
@@ -43,17 +47,19 @@ int main(){
                 int front = penalty.front();
                 penalty.pop();
                 B+=front;
-                int letsSayA = (N-(i/2)-1);
-                cout<<i<<"i ";
-                cout<<front<<"Front "<<B<<"B ";
-                cout<<letsSayA+A<<"LSSA ";
-                cout<<endl;
-                if(B > letsSayA+A && result == 1){
-                    cout<<i+1<<"Jadhav"<<endl;
+                int letsSayA = (N-(i/2));
+                int letsSayB = (N-(i/2)-1);
+//                cout<<N<<" "<<i/2<<" ";
+//                cout<<i<<"i ";
+//                cout<<front<<"Front "<<B+letsSayB<<"B ";
+//                cout<<letsSayA+A<<"LSSA ";
+//                cout<<endl;
+                if(B+letsSayB > letsSayA+A && result == 1){
+                    cout<<i+1<<endl;
                     break;
                 }
             }
         }
-        cout<<N<<endl;
+        if(penalty.empty())cout<<2*N<<endl;
     }
 }
