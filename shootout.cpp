@@ -7,59 +7,26 @@
 using namespace std;
 
 int main(){
-    int T=0,N=0;
-    cin>>T;
-    cout<<T;
+    int T,N;
+    scanf("%d",&T);
     while(T--){
-        queue<int> penalty;
-        int result, a=0, b=0;
         scanf("%d",&N);
+        char penalty[2*N];
+        scanf("%s",penalty);
+        int ca=0,cb=0,ra=N,rb=N,r=2*N;
         for(int i=0;i<2*N;i++){
-            int c;
-            scanf("%1d",&c);
-            a = i+1%2!=0 ? a+c : a;
-            b = i+1%2==0 ? b+c : b;
-//            cout<<a<<" "<<b<<" "<<endl;
-            result = a>b ? 0 : 1;
-            result = a==b ? -1 : result;
-            penalty.push(c);
-        }
-//        cout<<result<<" result"<<endl;
-//        break;
-
-        int A=0,B=0;
-        for(int i=1;i<=2*N;i++){
             if(i%2!=0){
-                int front = penalty.front();
-                penalty.pop();
-                A+=front;
-                int letsSayA = (N-(i/2)-1);
-                int letsSayB = (N-(i/2));
-//                cout<<i<<"i ";
-//                cout<<front<<"Front "<<A+letsSayA<<"A ";
-//                cout<<letsSayB+B<<"LSSB ";
-//                cout<<endl;
-                if(A+letsSayA > letsSayB+B && result == 0){
-                    cout<<i+1<<"Jadhav"<<endl;
-                    break;
-                }
+                ca = penalty[i]=='1'? ca+1 : ca+0;
+                ra--;
             }else{
-                int front = penalty.front();
-                penalty.pop();
-                B+=front;
-                int letsSayA = (N-(i/2));
-                int letsSayB = (N-(i/2)-1);
-//                cout<<N<<" "<<i/2<<" ";
-//                cout<<i<<"i ";
-//                cout<<front<<"Front "<<B+letsSayB<<"B ";
-//                cout<<letsSayA+A<<"LSSA ";
-//                cout<<endl;
-                if(B+letsSayB > letsSayA+A && result == 1){
-                    cout<<i+1<<endl;
-                    break;
-                }
+                cb = penalty[i]=='1' ? cb+1 : cb+0;
+                rb--;
+            }
+            if(ca>cb+rb || cb>ca+ra){
+                r=i+1;
+                break;
             }
         }
-        if(penalty.empty())cout<<2*N<<endl;
+        printf("%d\n",r);
     }
 }
