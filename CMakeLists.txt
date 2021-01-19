@@ -3,4 +3,4 @@ project(Ceethings)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(Ceethings Scraps/uselessmachine.cpp)
+add_executable(Ceethings Scraps/plusplus.cpp)
